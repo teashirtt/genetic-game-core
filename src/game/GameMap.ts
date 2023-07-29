@@ -63,19 +63,15 @@ export class GameMap extends GameObject {
             // 这里只用判断 next pipe 即可
             if ((bird_x - pipe.x) * (bird_x - pipe.x) + (bird_y - pipe.top_height) * (bird_y - pipe.top_height) <= 100) {
                 if (this.birds[i].bird_info.alive)
-                    console.log('上-右下角');
                 return false
             } else if ((bird_x - pipe.x) * (bird_x - pipe.x) + (bird_y - pipe.bottom_height) * (bird_y - pipe.bottom_height) <= 100) {
                 if (this.birds[i].bird_info.alive)
-                    console.log('下-左上角');
                 return false
             } else if (bird_y <= pipe.top_height && pipe.x - bird_x <= 10 || bird_y >= window.innerHeight - pipe.bottom_height && pipe.x - bird_x <= 10) {
                 if (this.birds[i].bird_info.alive)
-                    console.log('左侧');
                 return false
             } else if (bird_x >= pipe.x && bird_x <= pipe.x + 40 && (bird_y - 10 <= pipe.top_height || bird_y + 10 >= window.innerHeight - pipe.bottom_height)) {
                 if (this.birds[i].bird_info.alive)
-                    console.log('顶部');
                 return false
             }
             return true

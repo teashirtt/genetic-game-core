@@ -6,11 +6,11 @@
 
 <script setup  lang="ts">
 import { ref, onMounted } from 'vue'
-import { GameArgs, GameMap } from '../game/GameMap'
+import { GameArgs, GameMap } from './game/GameMap'
 
 const canvas = ref<HTMLCanvasElement | null>(null)
 
-const gameargs: GameArgs = { bird_count: 100, mutate_rate: 0.2, pipe_speed: 4, pipe_gap: 400, bird_nn_structure: [4, 6, 1] }
+const gameargs: GameArgs = { bird_count: 100, mutate_rate: 0.2, pipe_speed: 5, pipe_gap: 400, bird_nn_structure: [4, 6, 6, 1] }
 
 onMounted(() => {
     canvas.value!.width = window.innerWidth

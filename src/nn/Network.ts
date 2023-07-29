@@ -34,11 +34,11 @@ const mutate = (nn: INetwork, mutate_rate: number): void => {
 }
 
 const save = (nn: INetwork): void => {
-    localStorage.setItem('model', JSON.stringify(nn.layers))
+    sessionStorage.setItem('model', JSON.stringify(nn.layers))
 }
 
 const load = (nn: INetwork): void => {
-    const model = localStorage.getItem('model')
+    const model = sessionStorage.getItem('model')
     if (model) {
         nn.layers = JSON.parse(model)
     }
