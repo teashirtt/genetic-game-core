@@ -10,12 +10,12 @@ import { GameArgs, GameMap } from '@game/GameMap'
 
 const canvas = ref<HTMLCanvasElement>(null!)
 
-const gameargs: GameArgs = { bird_count: 100, mutate_rate: 0.2, pipe_speed: 5, pipe_gap: 400, bird_nn_structure: [4, 6, 6, 1] }
+const gameArgs: GameArgs = { bird_count: 100, mutate_rate: 0.2, pipe_speed: 4, pipe_gap: 400, bird_nn_structure: [4, 6, 6, 1] }
 
 onMounted(() => {
   canvas.value!.width = window.innerWidth
   canvas.value!.height = window.innerHeight
-  new GameMap(canvas.value!, gameargs)
+  new GameMap(canvas.value!, gameArgs)
 })
 </script>
 

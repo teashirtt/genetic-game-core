@@ -22,10 +22,10 @@ npm run dev
 但是`GameView.vue`中可以手动调参！
 
 ```typescript
-const gameargs: GameArgs = {
+const gameArgs: GameArgs = {
   bird_count: 100, // 每批生成小鸟数量
   mutate_rate: 0.2, // 突变概率
-  pipe_speed: 5, // 管道速度（根据小鸟相对论，其实就是小鸟的速度）
+  pipe_speed: 4, // 管道速度（根据相对论，其实就是小鸟的速度）
   pipe_gap: 400, // 管道间的距离
   bird_nn_structure: [4, 6, 6, 1] // 控制小鸟运动的神经网络结构
 }

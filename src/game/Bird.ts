@@ -18,7 +18,7 @@ export class Bird extends GameObject {
     super()
     this.ctx = ctx
     this.bird_info = { x: 600, y: window.innerHeight / 2, y_speed: 0, g: 0, alive: true, mutate_rate: mutate_rate }
-    this.nn = Network.creat(nn_structure)
+    this.nn = Network.create(nn_structure)
   }
 
   draw(): void {

@@ -25,15 +25,15 @@ export class GameMap extends GameObject {
   ctx: CanvasRenderingContext2D
   pipes: Pipes
   birds: Bird[]
-  gameargs: GameArgs
-  gameinfo: GameInfo
-  constructor(canvas: HTMLCanvasElement, gameargs: GameArgs) {
+  gameArgs: GameArgs
+  gameInfo: GameInfo
+  constructor(canvas: HTMLCanvasElement, gameArgs: GameArgs) {
     super()
     this.canvas = canvas
     this.ctx = canvas.getContext('2d')!
 
-    this.gameargs = gameargs
-    this.gameinfo = {
+    this.gameArgs = gameArgs
+    this.gameInfo = {
       epoch: 0,
       last_mutate_epoch: 0,
       last_best_epoch: 0,
@@ -42,7 +42,7 @@ export class GameMap extends GameObject {
       last_best_score: 0
     }
 
-    this.pipes = new Pipes(this.ctx, this.gameargs.pipe_speed, this.gameargs.pipe_gap)
+    this.pipes = new Pipes(this.ctx, this.gameArgs.pipe_speed, this.gameArgs.pipe_gap)
     this.birds = []
   }
 
@@ -117,29 +117,29 @@ export class GameMap extends GameObject {
     }
     this.ctx.clearRect(0, 0, window.innerWidth, window.innerHeight)
     this.setMap()
-    this.pipes = new Pipes(this.ctx, this.gameargs.pipe_speed, this.gameargs.pipe_gap)
+    this.pipes = new Pipes(this.ctx, this.gameArgs.pipe_speed, this.gameArgs.pipe_gap)
     this.birds = []
-    for (let i = 0; i < this.gameargs.bird_count; i++) {
+    for (let i = 0; i < this.gameArgs.bird_count; i++) {
       // 这里设置突变率与 epoch 的关系
-      this.birds.push(new Bird(this.ctx, this.gameargs.mutate_rate, this.gameargs.bird_nn_structure))
+      this.birds.push(new Bird(this.ctx, this.gameArgs.mutate_rate, this.gameArgs.bird_nn_structure))
     }
-    this.gameinfo.epoch += 1
+    this.gameInfo.epoch += 1
   }
 
   show_epoch(): void {
     this.ctx.fillStyle = '#ffffff'
     this.ctx.font = '16px Arial'
-    this.ctx.fillText(`epoach : ${this.gameinfo.epoch}`, 10, 20)
-    this.ctx.fillText(`mutate_rate : ${this.gameargs.mutate_rate.toFixed(4)}`, 10, 45)
-    this.ctx.fillText(`best_score:${this.gameinfo.last_best_score}`, 10, 70)
-    this.ctx.fillText(`last_best_epoch:${this.gameinfo.last_best_epoch}`, 10, 95)
-    this.ctx.fillText(`alive_count:${this.gameinfo.alive_count}`, 10, 120)
+    this.ctx.fillText(`epoch : ${this.gameInfo.epoch}`, 10, 20)
+    this.ctx.fillText(`mutate_rate : ${this.gameArgs.mutate_rate.toFixed(4)}`, 10, 45)
+    this.ctx.fillText(`best_score:${this.gameInfo.last_best_score}`, 10, 70)
+    this.ctx.fillText(`last_best_epoch:${this.gameInfo.last_best_epoch}`, 10, 95)
+    this.ctx.fillText(`alive_count:${this.gameInfo.alive_count}`, 10, 120)
   }
 
   init(): void {
     this.setMap()
-    for (let i = 0; i < this.gameargs.bird_count; i++) {
-      this.birds.push(new Bird(this.ctx, this.gameargs.mutate_rate, this.gameargs.bird_nn_structure))
+    for (let i = 0; i < this.gameArgs.bird_count; i++) {
+      this.birds.push(new Bird(this.ctx, this.gameArgs.mutate_rate, this.gameArgs.bird_nn_structure))
     }
   }
 
@@ -153,35 +153,35 @@ export class GameMap extends GameObject {
     }
 
     let best_bird: Bird | undefined = undefined
-    this.gameinfo.alive_count = 0
+    this.gameInfo.alive_count = 0
     for (let i = 0; i < this.birds.length; i++) {
       if (this.birds[i].bird_info.alive) {
-        this.gameinfo.alive_count += 1
+        this.gameInfo.alive_count += 1
         if (!best_bird) {
           best_bird = this.birds[i]
         }
       }
     }
     if (!best_bird) {
-      if (this.gameinfo.last_best_bird && this.pipes.total > this.gameinfo.last_best_score) {
+      if (this.gameInfo.last_best_bird && this.pipes.total > this.gameInfo.last_best_score) {
         // 更新最好模型
-        Network.save(this.gameinfo.last_best_bird?.nn)
-        this.gameinfo.last_best_score = this.pipes.total
+        Network.save(this.gameInfo.last_best_bird?.nn)
+        this.gameInfo.last_best_score = this.pipes.total
 
-        this.gameargs.mutate_rate =
-          this.pipes.total - this.gameinfo.last_best_score > 5 ? this.gameargs.mutate_rate * 0.2 : this.gameargs.mutate_rate * 0.7
-        this.gameinfo.last_mutate_epoch = this.gameinfo.epoch
-        this.gameinfo.last_best_epoch = this.gameinfo.epoch
-      } else if (this.gameinfo.epoch - this.gameinfo.last_mutate_epoch > 3) {
+        this.gameArgs.mutate_rate =
+          this.pipes.total - this.gameInfo.last_best_score > 5 ? this.gameArgs.mutate_rate * 0.2 : this.gameArgs.mutate_rate * 0.7
+        this.gameInfo.last_mutate_epoch = this.gameInfo.epoch
+        this.gameInfo.last_best_epoch = this.gameInfo.epoch
+      } else if (this.gameInfo.epoch - this.gameInfo.last_mutate_epoch > 3) {
         // 回调突变率避免陷入局部最小值
-        this.gameargs.mutate_rate = Math.min(this.gameargs.mutate_rate * 1.1, 0.2)
-        this.gameinfo.last_mutate_epoch = this.gameinfo.epoch
+        this.gameArgs.mutate_rate = Math.min(this.gameArgs.mutate_rate * 1.1, 0.2)
+        this.gameInfo.last_mutate_epoch = this.gameInfo.epoch
       }
       this.reset_game()
       return
     }
 
-    this.gameinfo.last_best_bird = best_bird
+    this.gameInfo.last_best_bird = best_bird
     this.ctx.clearRect(0, 0, window.innerWidth, window.innerHeight)
     this.setMap()
     this.show_epoch()

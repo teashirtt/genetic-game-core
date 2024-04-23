@@ -4,7 +4,7 @@ export interface INetwork {
   layers: ILayer[]
 }
 
-const creat = (layer_architecture: number[]): INetwork => {
+const create = (layer_architecture: number[]): INetwork => {
   const layers: ILayer[] = []
 
   for (let i = 0; i < layer_architecture.length - 1; i++) {
@@ -45,7 +45,7 @@ const load = (nn: INetwork): void => {
 }
 
 export default {
-  creat,
+  create,
   feed,
   mutate,
   save,
