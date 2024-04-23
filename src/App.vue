@@ -1,4 +1,3 @@
-
 <template>
   <GameView />
 </template>
@@ -7,5 +6,4 @@
 import GameView from './GameView.vue'
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

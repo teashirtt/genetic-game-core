@@ -1,44 +1,44 @@
-import Neural, { INeural } from "./Neural"
+import Neural, { INeural } from './Neural'
 
 export interface ILayer {
-    neurals: INeural[]
+  neurals: INeural[]
 }
 
 const ReLu = (e: number): number => {
-    return Math.max(0, e)
+  return Math.max(0, e)
 }
 
 const create = (input_count: number, neural_count: number): ILayer => {
-    const neurals: INeural[] = []
+  const neurals: INeural[] = []
 
-    for (let i = 0; i < neural_count; i++) {
-        neurals.push(Neural.create(input_count))
-    }
+  for (let i = 0; i < neural_count; i++) {
+    neurals.push(Neural.create(input_count))
+  }
 
-    return {
-        neurals
-    }
+  return {
+    neurals
+  }
 }
 
 const feed = (nnl: ILayer, inputs: number[]): number[] => {
-    const outputs: number[] = []
+  const outputs: number[] = []
 
-    for (let neural of nnl.neurals) {
-        const output: number = Neural.feed(neural, inputs)
-        outputs.push(ReLu(output))
-    }
+  for (let neural of nnl.neurals) {
+    const output: number = Neural.feed(neural, inputs)
+    outputs.push(ReLu(output))
+  }
 
-    return outputs
+  return outputs
 }
 
 const mutate = (nnl: ILayer, mutate_rate: number): void => {
-    for (let neural of nnl.neurals) {
-        Neural.mutate(neural, mutate_rate)
-    }
+  for (let neural of nnl.neurals) {
+    Neural.mutate(neural, mutate_rate)
+  }
 }
 
 export default {
-    create,
-    feed,
-    mutate
+  create,
+  feed,
+  mutate
 }
