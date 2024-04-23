@@ -6,7 +6,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import { GameArgs, GameMap } from './game/GameMap'
+import { GameArgs, GameMap } from '@game/GameMap'
 
 const canvas = ref<HTMLCanvasElement>(null!)
 

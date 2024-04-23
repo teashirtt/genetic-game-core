@@ -1,4 +1,4 @@
-import { GameObject } from './GameObject'
+import { GameObject } from '@game/GameObject'
 
 export interface PipeEntity {
   x: number

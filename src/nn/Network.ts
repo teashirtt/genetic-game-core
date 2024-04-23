@@ -1,4 +1,4 @@
-import Layer, { ILayer } from './Layer'
+import Layer, { ILayer } from '@nn/Layer'
 
 export interface INetwork {
   layers: ILayer[]

@@ -1,7 +1,7 @@
-import { GameObject } from './GameObject'
-import { Bird, BirdEntity } from '../game/Bird'
-import { Pipes, PipeEntity } from '../game/Pipes'
-import Network from '../nn/Network'
+import { GameObject } from '@game/GameObject'
+import { Bird, BirdEntity } from '@game/Bird'
+import { Pipes, PipeEntity } from '@game/Pipes'
+import Network from '@nn/Network'
 
 export interface GameArgs {
   bird_count: number

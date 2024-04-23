@@ -1,5 +1,5 @@
-import { GameObject } from './GameObject'
-import Network, { INetwork } from '../nn/Network'
+import { GameObject } from '@game/GameObject'
+import Network, { INetwork } from '@nn/Network'
 
 export interface BirdEntity {
   x: number

@@ -1,4 +1,4 @@
-import Neural, { INeural } from './Neural'
+import Neural, { INeural } from '@nn/Neural'
 
 export interface ILayer {
   neurals: INeural[]
